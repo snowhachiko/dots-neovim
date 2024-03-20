@@ -50,7 +50,7 @@ require('packer').startup(function(use)
     }
     -- indent line
     use 'lukas-reineke/indent-blankline.nvim'
-
+    use 'onsails/lspkind.nvim'
     -------------------------------------------
     ---- Fuzzy find, searching, navigating ----
     -------------------------------------------
@@ -176,7 +176,6 @@ require('packer').startup(function(use)
             })
         end
     })
-
 end)
 
 local lsp_zero = require('lsp-zero')
