@@ -51,6 +51,7 @@ require('packer').startup(function(use)
     -- indent line
     use 'lukas-reineke/indent-blankline.nvim'
     use 'onsails/lspkind.nvim'
+
     -------------------------------------------
     ---- Fuzzy find, searching, navigating ----
     -------------------------------------------
@@ -67,7 +68,6 @@ require('packer').startup(function(use)
         branch = "harpoon2",
         requires = { { "nvim-lua/plenary.nvim" } }
     }
-    use 'kelly-lin/ranger.nvim'
     -- switching to tmux panes
     use 'christoomey/vim-tmux-navigator'
     --------------------------------------------
@@ -98,7 +98,9 @@ require('packer').startup(function(use)
         end
     }
 
+    -----------------------------
     ---- autocompletion, lsp ----
+    -----------------------------
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -176,6 +178,17 @@ require('packer').startup(function(use)
             })
         end
     })
+
+    -- sessions
+    use {
+        'rmagatti/auto-session',
+        config = function()
+            require("auto-session").setup {
+                log_level = "error",
+                auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+            }
+        end
+    }
 end)
 
 local lsp_zero = require('lsp-zero')

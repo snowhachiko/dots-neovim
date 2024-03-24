@@ -1,16 +1,14 @@
--- vim.keymap.set("n", ",fe", vim.cmd.Ex)
+vim.keymap.set("n", ",fe", vim.cmd.Ex)
 
-vim.keymap.set("n", ",fe", "", {
-    noremap = true,
-    callback = function()
-        require("ranger-nvim").open(true)
-    end,
-})
+-- Resizing Continously with ALT
+vim.keymap.set('n', '<A-h>', '<C-W>>', {noremap = true})
+vim.keymap.set('n', '<A-l>', '<C-W><', {noremap = true})
+vim.keymap.set('n', '<A-k>', '<C-W>+', {noremap = true})
+vim.keymap.set('n', '<A-j>', '<C-W>-', {noremap = true})
 
 -- quickfix
 vim.keymap.set("n", "<leader>]", ":cnext<CR>", { desc = "Forward qfixlist" })
 vim.keymap.set("n", "<leader>[", ":cprev<CR>", { desc = "Backward qfixlist" })
---
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Forward location list"})
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Backward location list"})
 
@@ -64,7 +62,6 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<leader>f', function()
         vim.lsp.buf.format { async = true }
     end)
-
 end)
 
 --========= DAP
@@ -92,12 +89,8 @@ end)
 
 -- harpoon
 local harpoon = require("harpoon")
-
 vim.keymap.set('n', '<leader>a', function() harpoon:list():append() end)
 vim.keymap.set('n', '<leader>`', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
---
--- vim.keymap.set('n', '<leader>hn', function() harpoon:list():next() end)
--- vim.keymap.set('n', '<leader>hp', function() harpoon:list():prev() end)
 vim.keymap.set('n', '<C-N>', function() harpoon:list():next() end)
 vim.keymap.set('n', '<C-P>', function() harpoon:list():prev() end)
 
