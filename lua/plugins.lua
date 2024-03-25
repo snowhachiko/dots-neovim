@@ -180,15 +180,18 @@ require('packer').startup(function(use)
     })
 
     -- sessions
-    use {
-        'rmagatti/auto-session',
-        config = function()
-            require("auto-session").setup {
-                log_level = "error",
-                auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-            }
-        end
-    }
+    -- use {
+    --     'rmagatti/auto-session',
+    --     -- config = function()
+    --     --     require("auto-session").setup {
+    --     --         log_level = "error",
+    --     --         auto_session_enabled = false,
+    --     --         auto_session_create_enabled = false,
+    --     --         auto_save_enabled = false,
+    --     --         -- auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+    --     --     }
+    --     -- end
+    -- }
 end)
 
 local lsp_zero = require('lsp-zero')
