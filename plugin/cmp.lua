@@ -21,15 +21,15 @@ end
 
 cmp.setup({
     sources = {
-        {
-            name = 'luasnip',
-            option = {
-                show_autosnippets = true,
-                use_show_condition = false
-            }
-        },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
+        {
+            name = 'luasnip',
+            -- option = {
+            --     show_autosnippets = true,
+            --     use_show_condition = false
+            -- }
+        },
     },
     {
         { name = 'buffer' },
@@ -52,14 +52,23 @@ cmp.setup({
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
-    mapping = cmp.mapping.preset.insert({
+    mapping = cmp.mapping({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({
-            select = false,
+
+        ['<CR>'] = cmp.mapping({
+            i = function(fallback)
+                if cmp.visible() and cmp.get_active_entry() then
+                    cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                else
+                    fallback()
+                end
+            end,
+            s = cmp.mapping.confirm({ select = false }),
+            c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
         }),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -67,10 +76,8 @@ cmp.setup({
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-                -- elseif has_words_before() then
-                -- 	cmp.complete()
-            elseif vim.fn.pumvisible() == 1 then
-                cmp.confirm()
+            elseif has_words_before() then
+                cmp.complete()
             else
                 fallback()
             end
