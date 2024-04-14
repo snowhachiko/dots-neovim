@@ -203,6 +203,10 @@ require('mason-lspconfig').setup({
     }
 })
 
+-- when nvim 0.10 is out
+-- vim.lsp.inlay_hint.enable(0, true)
+-- https://vinnymeller.com/posts/neovim_nightly_inlay_hints/
+
 require('Comment').setup()
 require('gitsigns').setup()
 require('transparent').setup()
