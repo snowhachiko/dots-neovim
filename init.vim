@@ -1,4 +1,4 @@
-set relativenumber
+" set relativenumber
 set numberwidth=3
 set softtabstop=4
 set tabstop=4

@@ -70,6 +70,8 @@ require('packer').startup(function(use)
     }
     -- switching to tmux panes
     use 'christoomey/vim-tmux-navigator'
+    -- TODO highlight and list
+    use 'folke/todo-comments.nvim'
     --------------------------------------------
 
     -- Git integration
@@ -207,6 +209,7 @@ require('mason-lspconfig').setup({
 -- vim.lsp.inlay_hint.enable(0, true)
 -- https://vinnymeller.com/posts/neovim_nightly_inlay_hints/
 
+require('todo-comments').setup()
 require('Comment').setup()
 require('gitsigns').setup()
 require('transparent').setup()

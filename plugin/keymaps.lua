@@ -1,10 +1,10 @@
 vim.keymap.set("n", ",fe", vim.cmd.Ex)
 
 -- Resizing Continously with ALT
-vim.keymap.set('n', '<A-h>', '<C-W>>', {noremap = true})
-vim.keymap.set('n', '<A-l>', '<C-W><', {noremap = true})
-vim.keymap.set('n', '<A-k>', '<C-W>+', {noremap = true})
-vim.keymap.set('n', '<A-j>', '<C-W>-', {noremap = true})
+vim.keymap.set('n', '<A-h>', '<C-W>>', { noremap = true })
+vim.keymap.set('n', '<A-l>', '<C-W><', { noremap = true })
+vim.keymap.set('n', '<A-k>', '<C-W>+', { noremap = true })
+vim.keymap.set('n', '<A-j>', '<C-W>-', { noremap = true })
 
 -- quickfix
 vim.keymap.set("n", "<leader>]", ":cnext<CR>", { desc = "Forward qfixlist" })
@@ -26,6 +26,7 @@ vim.keymap.set('n', ',fh', builtin.help_tags, {})
 vim.keymap.set('n', ',fg', builtin.git_files, {})
 vim.keymap.set('n', ',fr', builtin.lsp_references, {})
 vim.keymap.set('n', ',fc', builtin.git_commits, {})
+vim.keymap.set('n', ',ft', function() vim.api.nvim_command(":TodoTelescope") end, {})
 
 --=========== LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -33,7 +34,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
 local lsp_zero = require('lsp-zero').preset({})
 
 lsp_zero.on_attach(function(client, bufnr)
