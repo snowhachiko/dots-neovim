@@ -196,9 +196,15 @@ require('packer').startup(function(use)
     -- }
 end)
 
+local border_style = "single"
+
 local lsp_zero = require('lsp-zero')
 
-require('mason').setup()
+require('mason').setup({
+    ui = {
+        border = border_style
+    }
+})
 require('mason-lspconfig').setup({
     handlers = {
         lsp_zero.default_setup,
@@ -213,7 +219,6 @@ require('todo-comments').setup()
 require('Comment').setup()
 require('gitsigns').setup()
 require('transparent').setup()
-require('lspconfig.ui.windows').default_options.border = 'single'
 
 local harpoon = require("harpoon")
 harpoon:setup()
@@ -250,5 +255,7 @@ require('ibl').setup {
     }
 }
 
-vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
-vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+-- additional styling
+-- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+vim.api.nvim_set_hl(0,"NormalFloat", { bg = "none" })
+require('lspconfig.ui.windows').default_options.border = border_style
