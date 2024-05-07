@@ -3,6 +3,7 @@ set numberwidth=3
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
+set number
 
 " use spaces as one tab (formatting)
 set expandtab
