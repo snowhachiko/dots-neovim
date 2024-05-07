@@ -50,6 +50,7 @@ require('packer').startup(function(use)
     }
     -- indent line
     use 'lukas-reineke/indent-blankline.nvim'
+    -- pictograms to lsp
     use 'onsails/lspkind.nvim'
 
     -------------------------------------------
@@ -72,17 +73,12 @@ require('packer').startup(function(use)
     use 'christoomey/vim-tmux-navigator'
     -- TODO highlight and list
     use 'folke/todo-comments.nvim'
+    -- file explorer, edit FS like buffer
     --------------------------------------------
 
     -- Git integration
     use 'lewis6991/gitsigns.nvim'
     use 'tpope/vim-fugitive'
-
-    -- sourcegraph cody
-    use {
-        'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua',
-        requires = { 'nvim-lua/plenary.nvim' }
-    }
 
     -- debugging
     use 'mfussenegger/nvim-dap'
@@ -210,13 +206,13 @@ require('mason-lspconfig').setup({
         lsp_zero.default_setup,
     }
 })
+require("mason-nvim-dap").setup()
 
 -- when nvim 0.10 is out
 -- vim.lsp.inlay_hint.enable(0, true)
 -- https://vinnymeller.com/posts/neovim_nightly_inlay_hints/
 
 require('todo-comments').setup()
-require('Comment').setup()
 require('gitsigns').setup()
 require('transparent').setup()
 
@@ -257,5 +253,5 @@ require('ibl').setup {
 
 -- additional styling
 -- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
-vim.api.nvim_set_hl(0,"NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 require('lspconfig.ui.windows').default_options.border = border_style

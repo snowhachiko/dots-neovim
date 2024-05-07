@@ -25,6 +25,44 @@ dap.adapters.codelldb = {
         -- detached = false,
     }
 }
+dap.adapters.python = {
+    type = "executable",
+    command = "debugpy-adapter",
+    -- stdpath("run") .. "/mason/packages/debugpy/venv/bin/python3"
+    
+    -- command = "/usr/bin/python3",
+--     -- args = {
+--     --     "-m",
+--     --     "debugpy.adapter"
+--     -- }
+}
+
+-- dap.adapters.python = function(cb, config)
+--     if config.request == 'attach' then
+--         ---@diagnostic disable-next-line: undefined-field
+--         local port = (config.connect or config).port
+--         ---@diagnostic disable-next-line: undefined-field
+--         local host = (config.connect or config).host or '127.0.0.1'
+--         cb({
+--             type = 'server',
+--             port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+--             host = host,
+--             options = {
+--                 source_filetype = 'python',
+--             },
+--         })
+--     else
+--         cb({
+--             type = 'executable',
+--             -- command = 'path/to/virtualenvs/debugpy/bin/python',
+--             command = 'debugpy',
+--             args = { '-m', 'debugpy.adapter' },
+--             options = {
+--                 source_filetype = 'python',
+--             },
+--         })
+--     end
+-- end
 
 dap.configurations.rust = {
     -- {
@@ -93,10 +131,35 @@ dap.configurations.java = {
         javaExec = "/usr/bin/java",
     }
 }
+dap.configurations.python = {
+    {
+        -- The first three options are required by nvim-dap
+        type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
+        request = 'launch',
+        name = "Launch file",
+
+        -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+        program = "${file}", -- This configuration will launch the current file if used.
+        -- pythonPath = function()
+        --     -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+        --     -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+        --     -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+        --     local cwd = vim.fn.getcwd()
+        --     if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+        --         return cwd .. '/venv/bin/python'
+        --     elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+        --         return cwd .. '/.venv/bin/python'
+        --     else
+        --         return '/usr/bin/python'
+        --     end
+        -- end,
+    }
+}
 
 
 -- Function to load configurations from .dap.json
-function load_dap_configurations()
+local function load_dap_configurations()
     local dap_json_path = vim.fn.getcwd() .. '/.dap.json'
 
     -- Check if the .dap.json file exists and is readable
@@ -120,18 +183,6 @@ function load_dap_configurations()
         print(".dap.json does not contain valid 'configurations' table")
         return
     end
-
-    -- for _, config in pairs(dap_json.configurations) do
-    --     -- Validate required configuration keys
-    --     if not (config.type and config.request and config.name and config.program) then
-    --         print("One or more configurations in .dap.json are missing required keys (type, request, name, program)")
-    --         return
-    --     end
-    --     -- Initialize the configuration type table if it does not exist
-    --     dap.configurations[config.type] = dap.configurations[config.type] or {}
-    --     -- Add the configuration to the appropriate type
-    --     table.insert(dap.configurations[config.type], config)
-    -- end
 
     for lang, configs in pairs(dap_json.configurations) do
         -- Initialize the configuration type table if it does not exist

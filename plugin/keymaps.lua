@@ -1,4 +1,5 @@
 vim.keymap.set("n", ",fe", vim.cmd.Ex)
+-- vim.keymap.set("n", ",fe", ":Oil<CR>")
 
 -- Resizing Continously with ALT
 vim.keymap.set('n', '<A-h>', '<C-W>>', { noremap = true })
