@@ -65,7 +65,6 @@ au BufNewFile,BufRead *.axaml setlocal filetype=xml
 " 	autocmd ColorScheme * hi clear SignColumn
 " augroup END
 
-colorscheme moonfly
 set termguicolors
 
 " Configure borders for floating windows
