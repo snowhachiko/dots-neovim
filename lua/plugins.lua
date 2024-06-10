@@ -1,15 +1,3 @@
---------------------
--- yank highlight --
---------------------
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = '*',
-})
-
 -------------
 -- plugins --
 -------------
@@ -25,6 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup({
 
     { "williamboman/mason.nvim" },
@@ -48,7 +37,7 @@ require("lazy").setup({
         "goolord/alpha-nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            require'alpha'.setup(require'alpha.themes.startify'.config)
+            require 'alpha'.setup(require 'alpha.themes.startify'.config)
         end
     },
     -- indent line
@@ -109,7 +98,7 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     "williamboman/mason-lspconfig.nvim",
 
-    { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
+    { "VonHeikemen/lsp-zero.nvim",       branch = "v3.x" },
 
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
@@ -167,23 +156,66 @@ require("lazy").setup({
         }
     },
 })
----
 
-local border_style = "single"
-
-local lsp_zero = require('lsp-zero')
-
+--------------------
+-- plugins config --
+--------------------
 require('mason').setup({
-    ui = {
-        border = border_style
-    }
+    ui = { border = Border_style }
 })
+
+-- lsp/lsp-zero
+local lspconfig = require('lspconfig')
+local lsp_configs_path = 'lspconfig.server_configurations'
+
 require('mason-lspconfig').setup({
+    ensure_installed = { 'clangd', 'lua_ls', 'omnisharp' },
     handlers = {
-        lsp_zero.default_setup,
-    }
+        -- default setup of installed servers
+        function(server_name)
+            require('lspconfig')[server_name].setup({})
+        end,
+
+        -- custom setups
+        emmet_language_server = function()
+            local emmet_config_path = lsp_configs_path .. '.emmet_language_server'
+            local emmet_default_config = require(emmet_config_path).default_config
+
+            local filetypes = emmet_default_config.filetypes
+            table.insert(filetypes, 'php')
+
+            lspconfig.emmet_language_server.setup({
+                filetypes = filetypes
+            })
+        end,
+
+        clangd = function()
+            lspconfig.clangd.setup({
+                cmd = {
+                    "clangd",
+                    "--fallback-style=webkit",
+                },
+                autostart = true
+                -- single_file_support = true,
+                -- root_dir = lspconfig.util.root_pattern('.')
+            })
+        end,
+
+        rust_analyzer = function()
+            lspconfig.rust_analyzer.setup({
+
+                -- make rustfmt work on standalone file
+                root_dir = function(fname)
+                    return lspconfig.util.root_pattern(
+                        'Cargo.toml', 'rust-project.json'
+                    )(fname) or vim.fn.getcwd()
+                end
+
+            })
+        end,
+
+    },
 })
-require("mason-nvim-dap").setup()
 
 require('todo-comments').setup()
 require('gitsigns').setup()
@@ -200,34 +232,3 @@ require('telescope').setup({
     }
 })
 require('telescope').load_extension "file_browser"
-
-----------------------
--- indent blankline --
-----------------------
-local hooks = require "ibl.hooks"
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "iblIndentColor", { fg = "#5c5c5c" })
-end)
-require('ibl').setup {
-    indent = {
-        char = "|",
-        highlight = {
-            "iblIndentColor"
-        },
-    },
-    whitespace = {
-    },
-    scope = {
-        highlight = { "iblIndentColor" },
-        show_start = false,
-        show_end = false,
-    }
-}
-
--------------
--- styling --
--------------
--- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
-vim.cmd [[colorscheme moonfly]]
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-require('lspconfig.ui.windows').default_options.border = border_style

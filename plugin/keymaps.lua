@@ -16,6 +16,7 @@ vim.keymap.set("n", "<leader>[", ":cprev<CR>", { desc = "Backward qfixlist" })
 -- TELESCOPE
 local builtin = require('telescope.builtin')
 local utils = require('telescope.utils')
+-- local actions = require('telescope.actions')
 -- vim.keymap.set('n', ',ff',
 --     function()
 --         -- builtin.find_files({ cwd = utils.buffer_dir() })
@@ -28,6 +29,7 @@ vim.keymap.set('n', ',fg', builtin.git_files, {})
 vim.keymap.set('n', ',fr', builtin.lsp_references, {})
 vim.keymap.set('n', ',fc', builtin.git_commits, {})
 vim.keymap.set('n', ',ft', function() vim.api.nvim_command(":TodoTelescope") end, {})
+-- vim.keymap.set('n', '<c-d>', actions.delete_buffer, {})
 
 --=========== LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -35,12 +37,13 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-local lsp_zero = require('lsp-zero').preset({})
+
+-- local lsp_zero = require('lsp-zero').preset({})
+local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
     -- :help lsp-zero-keybindings
-
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
     -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
@@ -90,7 +93,7 @@ end)
 
 -- harpoon
 local harpoon = require("harpoon")
-vim.keymap.set('n', '<leader>a', function() harpoon:list():append() end)
+vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
 vim.keymap.set('n', '<leader>`', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 vim.keymap.set('n', '<C-N>', function() harpoon:list():next() end)
 vim.keymap.set('n', '<C-P>', function() harpoon:list():prev() end)
