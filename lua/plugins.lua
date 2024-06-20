@@ -1,6 +1,3 @@
--------------
--- plugins --
--------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
@@ -64,8 +61,12 @@ require("lazy").setup({
     },
     -- switching to tmux panes
     "christoomey/vim-tmux-navigator",
+
     -- TODO highlight and list
-    "folke/todo-comments.nvim",
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
     -- file explorer, edit FS like buffer
     -- oil.nvim
     --------------------------------------------
@@ -145,15 +146,10 @@ require("lazy").setup({
         end
     },
 
-    -- leetcode plugin
-    {
-        "kawre/leetcode.nvim",
-        dependencies = {
-            { "nvim-telescope/telescope.nvim" },
-            { "nvim-lua/plenary.nvim" }, -- required by telescope
-            { "MunifTanjim/nui.nvim" },
-            { "rcarriga/nvim-notify" },
-        }
+}, {
+    ui = {
+        backdrop = 50,
+        border = Border_style
     },
 })
 
