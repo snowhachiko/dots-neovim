@@ -1,3 +1,78 @@
+vim.cmd[[
+" set relativenumber
+set numberwidth=3
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+set number
+
+set expandtab " use spaces as one tab (formatting)
+
+set smartindent
+set autoindent
+
+set ignorecase " search
+set smartcase " use case sensitive only where upper case is in search pattern"
+
+" wraping
+set breakindent
+set wrap
+set linebreak " line break at characters defined in breakat
+" wrap only at blank lines (spaces)
+set breakat=\  
+" set breakindentopt=min:20
+
+" only for tabs
+" set listchars=tab:\|\ 
+set showtabline=1 "0 - never, 1 - when more than one, 2 - always 
+
+set list lcs=tab:\|\ 
+"set listchars=tab:\|\ 
+
+set visualbell "no beeping:
+set hlsearch "highlight all search results"
+set splitbelow
+set splitright
+set ignorecase
+set clipboard=unnamedplus
+set fileformats=unix,dos
+set shell=/bin/bash
+
+let mapleader = " "
+
+set foldcolumn=0 " space for breakpoints
+
+set cmdheight=0 " disable command line when not entering commands
+
+set fillchars+=vert:\
+
+" Detects XAML files as XML
+au BufNewFile,BufRead *.xaml setlocal filetype=xml
+au BufNewFile,BufRead *.axaml setlocal filetype=xml
+
+set termguicolors
+syntax enable
+
+" Configure borders for floating windows
+autocmd User LspInfoOpen hi LspFloatWinBorder guifg=#00ff00 guibg=NONE gui=NONE cterm=NONE
+
+" apply changes when init.vim saved 
+" autocmd! BufWritePost $MYVIMRC source %
+
+" autocompletion
+set updatetime=250
+
+" set formatoptions-=cro " do not insert comment on new line
+
+]]
+
+vim.cmd('autocmd BufRead * echomsg "bufread event"')
+-- vim.cmd('autocmd BufAdd * echomsg " event"')
+-- vim.cmd('autocmd BufCreate * echomsg " event"')
+-- -- vim.cmd('autocmd FileType * echomsg "filetype event "..&filetype')
+-- -- vim.cmd('autocmd BufReadPost * echomsg "bufreadpost event"')
+-- vim.cmd('autocmd VimEnter * echomsg "vimenter event"')
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
@@ -96,12 +171,11 @@ require("lazy").setup({
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp-signature-help",
 
-    "neovim/nvim-lspconfig",
-    "williamboman/mason-lspconfig.nvim",
+    { "VonHeikemen/lsp-zero.nvim",         branch = "v3.x" },
+    { "neovim/nvim-lspconfig" },
+    { "williamboman/mason-lspconfig.nvim" },
 
-    { "VonHeikemen/lsp-zero.nvim",       branch = "v3.x" },
-
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { "nvim-treesitter/nvim-treesitter",   build = ":TSUpdate" },
 
     -- formatting, linting - if not language server
     "jose-elias-alvarez/null-ls.nvim",
@@ -162,6 +236,7 @@ require('mason').setup({
 
 -- lsp/lsp-zero
 local lspconfig = require('lspconfig')
+local lsp_zero = require('lsp-zero')
 local lsp_configs_path = 'lspconfig.server_configurations'
 
 require('mason-lspconfig').setup({
@@ -197,21 +272,11 @@ require('mason-lspconfig').setup({
             })
         end,
 
-        rust_analyzer = function()
-            lspconfig.rust_analyzer.setup({
-
-                -- make rustfmt work on standalone file
-                root_dir = function(fname)
-                    return lspconfig.util.root_pattern(
-                        'Cargo.toml', 'rust-project.json'
-                    )(fname) or vim.fn.getcwd()
-                end
-
-            })
-        end,
-
     },
 })
+
+-- allow using system wide installation
+lspconfig.rust_analyzer.setup {}
 
 require('todo-comments').setup()
 require('gitsigns').setup()
