@@ -66,7 +66,7 @@ set updatetime=250
 
 ]]
 
-vim.cmd('autocmd BufRead * echomsg "bufread event"')
+-- vim.cmd('autocmd BufRead * echomsg "bufread event"')
 -- vim.cmd('autocmd BufAdd * echomsg " event"')
 -- vim.cmd('autocmd BufCreate * echomsg " event"')
 -- -- vim.cmd('autocmd FileType * echomsg "filetype event "..&filetype')
