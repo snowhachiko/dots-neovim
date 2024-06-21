@@ -96,9 +96,13 @@ require("lazy").setup({
     -- colorschemes
     "rebelot/kanagawa.nvim",
     { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+
+    -- improve default vim.ui interfaces
     { "stevearc/dressing.nvim" },
+
     -- transparent
     { "xiyaowong/transparent.nvim" },
+
     -- statusline
     {
         "nvim-lualine/lualine.nvim",
@@ -236,7 +240,6 @@ require('mason').setup({
 
 -- lsp/lsp-zero
 local lspconfig = require('lspconfig')
-local lsp_zero = require('lsp-zero')
 local lsp_configs_path = 'lspconfig.server_configurations'
 
 require('mason-lspconfig').setup({
@@ -267,8 +270,6 @@ require('mason-lspconfig').setup({
                     "--fallback-style=webkit",
                 },
                 autostart = true
-                -- single_file_support = true,
-                -- root_dir = lspconfig.util.root_pattern('.')
             })
         end,
 
