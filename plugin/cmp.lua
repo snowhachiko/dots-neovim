@@ -142,10 +142,18 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = cmp.mapping.preset.cmdline({
+        ['<C-p>'] = cmp.config.disable,
+        ['<C-n>'] = cmp.config.disable
+    }),
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
-        { name = 'cmdline' }
+        {
+            name = 'cmdline',
+            option = {
+                ignore_cmds = { 'Man', '!' }
+            }
+        }
     })
 })
