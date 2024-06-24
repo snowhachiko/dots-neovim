@@ -1,9 +1,9 @@
 return {
     "mfussenegger/nvim-dap",
-    "jay-babu/mason-nvim-dap.nvim",
-    {
-        "rcarriga/nvim-dap-ui",
-        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
+    dependencies = {
+        "jay-babu/mason-nvim-dap.nvim",
+        "nvim-neotest/nvim-nio",
+        "rcarriga/nvim-dap-ui"
     },
     config = function()
         require("mason-nvim-dap").setup()
@@ -90,19 +90,21 @@ return {
         --     end
         -- end
 
+        --------------------
         -- Configurations --
+        --------------------
 
         dap.configurations.rust = {
-            -- {
-            --     name = "Launch file",
-            --     type = "codelldb",
-            --     request = "launch",
-            --     program = function()
-            --         return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug', 'file')
-            --     end,
-            --     cwd = '${workspaceFolder}',
-            --     stopOnEntry = false
-            -- },
+            {
+                name = "Launch file",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+                stopOnEntry = false
+            },
             -- {
             --     name = "Debug tests",
             --     type = "codelldb",
