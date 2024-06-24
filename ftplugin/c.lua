@@ -1,1 +1,1 @@
-vim.cmd [[set noexpandtab]]
+vim.opt.noexpandtab = true
