@@ -85,12 +85,8 @@ cmp.setup({
     },
     view = { docs = { auto_open = false } },
     window = {
-        completion = cmp.config.window.bordered({
-            max_width = 30,
-        }),
-        documentation = cmp.config.window.bordered({
-            -- max_width = 250
-        }),
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
