@@ -1,4 +1,3 @@
-require("mason-nvim-dap").setup()
 require("dapui").setup()
 
 local dap = require('dap')
@@ -17,7 +16,31 @@ dap.listeners.before.event_exited.dapui_config = function()
     dapui.close()
 end
 
--- Adapters --
+require("mason-nvim-dap").setup({
+    handlers = {
+        function(config)
+            require("mason-nvim-dap").default_setup(config)
+        end,
+        codelldb = function(config)
+            config.adapters = {
+                type = 'server',
+                port = "${port}",
+                -- host = '127.0.0.1',
+                -- port = 13000
+
+                executable = {
+                    command = 'codelldb',
+                    args = { "--port", "${port}" },
+
+                    -- On windows you may have to uncomment this:
+                    -- detached = false,
+                }
+            }
+        end
+
+    }
+})
+
 dap.adapters.cppdbg = {
     id = 'cppdbg',
     type = 'executable',
@@ -28,20 +51,6 @@ dap.adapters.coreclr = {
     type = 'executable',
     command = '/usr/local/netcoredbg',
     args = { '--interpreter=vscode' }
-}
-dap.adapters.codelldb = {
-    type = 'server',
-    port = "${port}",
-    -- host = '127.0.0.1',
-    -- port = 13000
-
-    executable = {
-        command = 'codelldb',
-        args = { "--port", "${port}" },
-
-        -- On windows you may have to uncomment this:
-        -- detached = false,
-    }
 }
 dap.adapters.gdb = {
     type = "executable",
@@ -86,7 +95,7 @@ dap.configurations.rust = {
         type = "gdb",
         request = "launch",
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug', 'file')
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = false,
