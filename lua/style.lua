@@ -10,11 +10,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
 })
 
-vim.cmd.colorscheme("moonfly")
 -- vim.cmd.colorscheme("kanagawa")
+vim.cmd.colorscheme("moonfly")
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 
--- add to lspconfig
--- require('lspconfig.ui.windows').default_options.border = Border_style
--- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+vim.g.rustaceanvim = {
+    tools = {
+        float_win_config = {
+            border = Border_style
+        }
+    }
+}

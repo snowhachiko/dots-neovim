@@ -46,18 +46,26 @@ vim.opt.updatetime = 150
 
 vim.opt.cmdheight = 0 -- disable command line when not entering commands
 
-
 -- Detects XAML files as XML
 vim.cmd [[
     au BufNewFile,BufRead *.xaml setlocal filetype=xml
     au BufNewFile,BufRead *.axaml setlocal filetype=xml
-    autocmd User LspInfoOpen hi LspFloatWinBorder guifg=#00ff00 guibg=NONE gui=NONE cterm=NONE
+]]
+
+
+-- Configure borders for floating windows
+vim.opt.pumblend = 0
+local float = { focusable = true, style = "minimal", border = "rounded", }
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float)
+
+vim.cmd [[
+    "autocmd User LspInfoOpen hi LspFloatWinBorder guifg=#00ff00 guibg=NONE gui=NONE cterm=NONE
 ]]
 
 vim.opt.termguicolors = true
 vim.cmd [[syntax enable]]
 
--- Configure borders for floating windows
 
 -- apply changes when init.vim saved
 -- autocmd! BufWritePost $MYVIMRC source %

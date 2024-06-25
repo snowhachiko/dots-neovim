@@ -8,6 +8,9 @@
 local lspconfig = require('lspconfig')
 local lsp_configs_path = 'lspconfig.server_configurations'
 
+local win = require('lspconfig.ui.windows')
+win.default_options.border = Border_style
+
 require('mason-lspconfig').setup({
     ensure_installed = { 'clangd', 'lua_ls', 'omnisharp' },
     handlers = {
