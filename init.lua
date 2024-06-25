@@ -23,19 +23,13 @@ package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
 
 vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*"))
 
-require('mason').setup({
+local has_mason,mason = pcall(require,"mason")
+if has_mason then
+mason.setup({
     ui = { border = Border_style }
 })
+end
+
 require("set")
 require("style")
 
-require('todo-comments').setup()
-require('gitsigns').setup()
-require('nvim-autopairs').setup()
-
-local harpoon = require("harpoon")
-vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
-vim.keymap.set('n', '<leader>`', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-vim.keymap.set('n', '<C-N>', function() harpoon:list():next() end)
-vim.keymap.set('n', '<C-P>', function() harpoon:list():prev() end)
-harpoon:setup()

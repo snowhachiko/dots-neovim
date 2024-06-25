@@ -79,24 +79,26 @@ vim.keymap.set('n', '<Leader>ds', function()
 end)
 
 -- neotest
-local neotest = require("neotest")
+local has_neotest, neotest = pcall(require,"neotest")
+if has_neotest then
+    -- run nearest test
+    vim.keymap.set("n", "<leader>tr", function()
+        neotest.run.run()
+    end)
+    vim.keymap.set('n', '<Leader>td', function()
+        neotest.run.run({ strategy = "dap" })
+    end)
+    
+    -- stop
+    vim.keymap.set('n', '<Leader>ts', function()
+        neotest.run.stop(vim.fn.expand("%"))
+    end)
+    
+    vim.keymap.set('n', '<Leader>tt', function()
+        neotest.summary.toggle()
+    end)
+end
 
--- run nearest test
-vim.keymap.set("n", "<leader>tr", function()
-    neotest.run.run()
-end)
-vim.keymap.set('n', '<Leader>td', function()
-    neotest.run.run({ strategy = "dap" })
-end)
-
--- stop
-vim.keymap.set('n', '<Leader>ts', function()
-    neotest.run.stop(vim.fn.expand("%"))
-end)
-
-vim.keymap.set('n', '<Leader>tt', function()
-    neotest.summary.toggle()
-end)
 ----------------------
 ------ comments ------
 ----------------------
