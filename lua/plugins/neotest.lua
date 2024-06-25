@@ -4,7 +4,3 @@ neotest.setup({
         require("rustaceanvim.neotest")
     }
 })
-
-vim.keymap.set("n", "<leader>tc", function()
-    neotest.run.run()
-end)
