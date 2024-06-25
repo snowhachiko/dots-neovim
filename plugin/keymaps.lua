@@ -10,12 +10,12 @@ vim.keymap.set('n', '<A-j>', '<C-W>-', { noremap = true })
 -- quickfix
 vim.keymap.set("n", "<leader>]", ":cnext<CR>", { desc = "Forward qfixlist" })
 vim.keymap.set("n", "<leader>[", ":cprev<CR>", { desc = "Backward qfixlist" })
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Forward location list"})
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Backward location list"})
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Forward location list" })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Backward location list" })
 
 
 ---------------------
--------- LSP -------- 
+-------- LSP --------
 ---------------------
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -78,19 +78,38 @@ vim.keymap.set('n', '<Leader>ds', function()
     widgets.centered_float(widgets.scopes)
 end)
 
+-- neotest
+local neotest = require("neotest")
+
+-- run nearest test
+vim.keymap.set("n", "<leader>tr", function()
+    neotest.run.run()
+end)
+vim.keymap.set('n', '<Leader>td', function()
+    neotest.run.run({ strategy = "dap" })
+end)
+
+-- stop
+vim.keymap.set('n', '<Leader>ts', function()
+    neotest.run.stop(vim.fn.expand("%"))
+end)
+
+vim.keymap.set('n', '<Leader>tt', function()
+    neotest.summary.toggle()
+end)
 ----------------------
 ------ comments ------
 ----------------------
 
--- -- :help comment.config.Mappings
---
--- -- Default comment.nvim mappings
---
--- -- gbc -- block comment normal mode
--- -- gb  -- block comment visual mode
---
--- -- Normal mode
--- -- `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
--- -- `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
--- -- `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
--- -- `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
+-- :help comment.config.Mappings
+
+-- Default comment.nvim mappings
+
+-- gbc -- block comment normal mode
+-- gb  -- block comment visual mode
+
+-- normal mode
+-- `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
+-- `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
+-- `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
+-- `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
