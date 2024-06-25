@@ -111,14 +111,12 @@ items = [
     "mason-nvim-dap.nvim",
 ]
 
-# [bundles.telescope]
-# items = [
-# ]
-
-# [bundles.style]
-# items = [
-#     "alpha-nvim"
-# ]
+[bundles.utils]
+items = [
+	"todo-comments.nvim",
+	"gitsigns.nvim",
+	"harpoon"
+]
 
 [config]
 plugins_dir = "plugins/"
