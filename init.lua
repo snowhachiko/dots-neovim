@@ -31,6 +31,7 @@ require("style")
 
 require('todo-comments').setup()
 require('gitsigns').setup()
+require('nvim-autopairs').setup()
 
 local harpoon = require("harpoon")
 vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
