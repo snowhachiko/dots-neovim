@@ -10,28 +10,14 @@ vim.keymap.set('n', '<A-j>', '<C-W>-', { noremap = true })
 -- quickfix
 vim.keymap.set("n", "<leader>]", ":cnext<CR>", { desc = "Forward qfixlist" })
 vim.keymap.set("n", "<leader>[", ":cprev<CR>", { desc = "Backward qfixlist" })
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Forward location list"})
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Backward location list"})
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Forward location list"})
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Backward location list"})
 
--- TELESCOPE
-local builtin = require('telescope.builtin')
-local utils = require('telescope.utils')
--- local actions = require('telescope.actions')
--- vim.keymap.set('n', ',ff',
---     function()
---         -- builtin.find_files({ cwd = utils.buffer_dir() })
---         builtin.find_files({ cwd = vim.fn.getcwd() })
---     end, {})
-vim.keymap.set('n', ',ff', builtin.find_files, {})
-vim.keymap.set('n', ',fb', builtin.buffers, {})
-vim.keymap.set('n', ',fh', builtin.help_tags, {})
-vim.keymap.set('n', ',fg', builtin.git_files, {})
-vim.keymap.set('n', ',fr', builtin.lsp_references, {})
-vim.keymap.set('n', ',fc', builtin.git_commits, {})
-vim.keymap.set('n', ',ft', function() vim.api.nvim_command(":TodoTelescope") end, {})
--- vim.keymap.set('n', '<c-d>', actions.delete_buffer, {})
 
---=========== LSP
+---------------------
+-------- LSP -------- 
+---------------------
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -67,49 +53,44 @@ autocmd('LspAttach', {
     end
 })
 
---========= DAP
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
-vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
-vim.keymap.set('n', '<Leader>dc', function() require('dap').close() end)
-vim.keymap.set('n', '<Leader>dt', function() require('dap').terminate() end)
-
-vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
-    require('dap.ui.widgets').hover()
-end)
-vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
-    require('dap.ui.widgets').preview()
-end)
-vim.keymap.set('n', '<Leader>df', function()
-    local widgets = require('dap.ui.widgets')
-    widgets.centered_float(widgets.frames)
-end)
-vim.keymap.set('n', '<Leader>ds', function()
-    local widgets = require('dap.ui.widgets')
-    widgets.centered_float(widgets.scopes)
-end)
-
--- harpoon
-local harpoon = require("harpoon")
-vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
-vim.keymap.set('n', '<leader>`', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-vim.keymap.set('n', '<C-N>', function() harpoon:list():next() end)
-vim.keymap.set('n', '<C-P>', function() harpoon:list():prev() end)
-
-
----- comments
--- :help comment.config.Mappings
-
--- Default comment.nvim mappings
-
--- gbc -- block comment normal mode
--- gb  -- block comment visual mode
-
--- Normal mode
--- `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
--- `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
--- `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
--- `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
+-- --========= DAP
+-- vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+-- vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+-- vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+-- vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+-- vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+-- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+-- vim.keymap.set('n', '<Leader>dc', function() require('dap').close() end)
+-- vim.keymap.set('n', '<Leader>dt', function() require('dap').terminate() end)
+--
+-- vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
+--     require('dap.ui.widgets').hover()
+-- end)
+-- vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
+--     require('dap.ui.widgets').preview()
+-- end)
+-- vim.keymap.set('n', '<Leader>df', function()
+--     local widgets = require('dap.ui.widgets')
+--     widgets.centered_float(widgets.frames)
+-- end)
+-- vim.keymap.set('n', '<Leader>ds', function()
+--     local widgets = require('dap.ui.widgets')
+--     widgets.centered_float(widgets.scopes)
+-- end)
+--
+-- -- harpoon
+--
+--
+-- ---- comments
+-- -- :help comment.config.Mappings
+--
+-- -- Default comment.nvim mappings
+--
+-- -- gbc -- block comment normal mode
+-- -- gb  -- block comment visual mode
+--
+-- -- Normal mode
+-- -- `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
+-- -- `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
+-- -- `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
+-- -- `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
