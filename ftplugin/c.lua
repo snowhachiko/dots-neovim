@@ -1,1 +1,1 @@
-vim.opt.noexpandtab = true
+vim.opt.expandtab = false
