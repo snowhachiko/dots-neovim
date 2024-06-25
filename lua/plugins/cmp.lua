@@ -1,30 +1,12 @@
-local has_cmp, cmp = pcall(require, "cmp")
-if not has_cmp then
-    error("cmp plugin not found")
-    return
-end
+require('nvim-autopairs').setup()
 
-local has_autopairs, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-if not has_autopairs then
-    error("nvim-autopairs plugin not found")
-    return
-end
-
-local has_luasnip, luasnip = pcall(require, "luasnip")
-if not has_luasnip then
-    error("luasnip plugin not found")
-    return
-end
-
-local has_lspkind, lspkind = pcall(require, 'lspkind')
-if not has_lspkind then
-    error("lspkind plugin not found")
-    return
-end
+local cmp = require("cmp")
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local luasnip = require("luasnip")
+local lspkind = require('lspkind')
 
 require("luasnip.loaders.from_vscode").lazy_load()
 -- require('luasnip.loaders.from_snipmate').lazy_load()
-
 
 -- If you want insert `(` after select function or method item
 cmp.event:on(
@@ -80,7 +62,7 @@ cmp.setup({
     preselect = cmp.PreselectMode.None,
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     view = { docs = { auto_open = false } },
