@@ -29,11 +29,11 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd('LspAttach', {
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-        vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', { buffer = true })
+        vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition)
+        vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration)
+        vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation)
+        vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references)
+        vim.keymap.set('n', ',gr', '<cmd>Telescope lsp_references<cr>', { buffer = true })
 
         vim.keymap.set('n', '<leader>e', function()
             vim.diagnostic.open_float(0, { scope = "line" })

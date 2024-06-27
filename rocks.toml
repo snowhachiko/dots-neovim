@@ -42,6 +42,7 @@ nvim-surround = "2.1.5"
 "trouble.nvim" = "3.4.3"
 neotest = "5.3.3"
 "telescope-file-browser.nvim" = "scm"
+"onedarkpro.nvim" = "0.8.0"
 
 [plugins.nvim-cmp]
 git = "hrsh7th/nvim-cmp"
@@ -78,6 +79,10 @@ rev = "v0.9.0"
 [plugins."harpoon"]
 git = "ThePrimeagen/harpoon"
 branch = "harpoon2"
+
+[plugins."one_monokai.nvim"]
+git = "cpea2506/one_monokai.nvim"
+rev = "v2.3.0"
 
 [bundles.lsp]
 items = [

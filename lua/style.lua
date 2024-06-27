@@ -10,9 +10,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
 })
 
--- vim.cmd.colorscheme("kanagawa")
--- vim.cmd.colorscheme("moonfly")
-
 local function set_colorscheme(name)
   local ok, _ = pcall(vim.cmd, 'colorscheme ' .. name)
   if not ok then
@@ -20,7 +17,15 @@ local function set_colorscheme(name)
   end
 end
 
+-- set_colorscheme("onedark")
+
+-- require("kanagawa").setup({
+--     transparent = true
+-- })
+-- set_colorscheme("kanagawa")
+
 set_colorscheme('moonfly')
+-- set_colorscheme('one_monokai')
 
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
