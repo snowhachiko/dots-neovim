@@ -27,8 +27,8 @@ end
 set_colorscheme('moonfly')
 -- set_colorscheme('one_monokai')
 
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 
 vim.g.rustaceanvim = {
     tools = {
@@ -37,3 +37,11 @@ vim.g.rustaceanvim = {
         }
     }
 }
+
+-- Configure borders for floating windows
+-- vim.opt.pumblend = 0
+-- local float = { focusable = true, style = "minimal", border = "rounded", }
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
+-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float)
+-- vim.lsp.handlers["textDocument/diagnostics"] = vim.lsp.with(vim.lsp.handlers.diagnostics, float)
+

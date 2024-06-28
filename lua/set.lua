@@ -40,6 +40,11 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.fileformats = { "unix", "dos" }
 vim.opt.shell = "/bin/bash"
 
+vim.opt.complete = ""
+-- Disable <C-p> and <C-n> in insert mode without outputting ^P or ^N
+vim.api.nvim_set_keymap('i', '<C-p>', '<C-o>:<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-n>', '<C-o>:<CR>', { noremap = true, silent = true })
+
 vim.g.mapleader = " "
 
 vim.opt.updatetime = 150
@@ -52,20 +57,12 @@ vim.cmd [[
     au BufNewFile,BufRead *.axaml setlocal filetype=xml
 ]]
 
-
--- Configure borders for floating windows
-vim.opt.pumblend = 0
-local float = { focusable = true, style = "minimal", border = "rounded", }
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, float)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, float)
-
 vim.cmd [[
     "autocmd User LspInfoOpen hi LspFloatWinBorder guifg=#00ff00 guibg=NONE gui=NONE cterm=NONE
 ]]
 
 vim.opt.termguicolors = true
 vim.cmd [[syntax enable]]
-
 
 -- apply changes when init.vim saved
 -- autocmd! BufWritePost $MYVIMRC source %
