@@ -50,6 +50,7 @@ cmp.setup({
     },
     {
         { name = 'buffer' },
+        { name = 'nvim_lua' }
     },
     formatting = {
         fields = { "abbr", "kind", "menu" },
