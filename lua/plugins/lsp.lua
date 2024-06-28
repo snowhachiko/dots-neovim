@@ -1,9 +1,9 @@
--- local cmp_lsp = require("cmp_nvim_lsp")
--- local capabilities = vim.tbl_deep_extend(
---     "force",
---     {},
---     vim.lsp.protocol.make_client_capabilities(),
---     cmp_lsp.default_capabilities())
+local cmp_lsp = require("cmp_nvim_lsp")
+local capabilities = vim.tbl_deep_extend(
+    "force",
+    {},
+    vim.lsp.protocol.make_client_capabilities(),
+    cmp_lsp.default_capabilities())
 
 local lspconfig = require('lspconfig')
 local lsp_configs_path = 'lspconfig.server_configurations'
@@ -16,7 +16,9 @@ require('mason-lspconfig').setup({
     handlers = {
         -- default setup of installed servers
         function(server_name)
-            require('lspconfig')[server_name].setup({})
+            require('lspconfig')[server_name].setup({
+                capabilities = capabilities
+            })
         end,
 
         -- custom setups
@@ -29,6 +31,12 @@ require('mason-lspconfig').setup({
 
             lspconfig.emmet_language_server.setup({
                 filetypes = filetypes
+            })
+        end,
+
+        omnisharp = function ()
+            lspconfig.omnisharp.setup({
+                capabilities = capabilities
             })
         end,
 
@@ -56,8 +64,3 @@ require('mason-lspconfig').setup({
         end,
     },
 })
--- allow using system wide installation
--- rustaceanvim may conflict
--- lspconfig.rust_analyzer.setup {
---     capabilities = capabilities
--- }
