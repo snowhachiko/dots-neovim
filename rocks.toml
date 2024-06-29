@@ -43,6 +43,7 @@ neotest = "5.3.3"
 "telescope-file-browser.nvim" = "scm"
 "onedarkpro.nvim" = "0.8.0"
 nvim-cmp= "0.0.1"
+"oil.nvim" = "2.10.0"
 
 [plugins."indent-blankline.nvim"]
 git = "lukas-reineke/indent-blankline.nvim"
