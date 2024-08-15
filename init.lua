@@ -3,7 +3,7 @@ require("lazy_init")
 
 require('todo-comments').setup()
 require('gitsigns').setup()
-require('transparent').setup()
+-- require('transparent').setup()
 
 local harpoon = require("harpoon")
 harpoon:setup()
