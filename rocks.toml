@@ -46,6 +46,7 @@ nvim-cmp= "scm"
 "oil.nvim" = "2.10.0"
 "conform.nvim" = "7.1.0"
 nvim-notify = "3.13.5"
+nvim-lint = "scm"
 
 [plugins."indent-blankline.nvim"]
 git = "lukas-reineke/indent-blankline.nvim"
