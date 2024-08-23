@@ -46,11 +46,23 @@ autocmd('LspAttach', {
         end)
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action)
-        vim.keymap.set('n', '<leader>f', function()
-            vim.lsp.buf.format { async = true }
-        end)
+        -- vim.keymap.set('n', '<leader>f', function()
+        --     vim.lsp.buf.format {
+        --         async = true,
+        --         filter = function(client) return client.name ~= "tsserver" end
+        --     }
+        -- end)
     end
 })
+
+-- user conform.nvim, if formatter is not present, uses lsp
+vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
+    require('conform').format({
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 500
+    })
+end)
 
 -- --========= DAP
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
@@ -78,7 +90,7 @@ vim.keymap.set('n', '<Leader>ds', function()
 end)
 
 -- neotest
-local has_neotest, neotest = pcall(require,"neotest")
+local has_neotest, neotest = pcall(require, "neotest")
 if has_neotest then
     -- run nearest test
     vim.keymap.set("n", "<leader>tr", function()
@@ -87,12 +99,12 @@ if has_neotest then
     vim.keymap.set('n', '<Leader>td', function()
         neotest.run.run({ strategy = "dap" })
     end)
-    
+
     -- stop
     vim.keymap.set('n', '<Leader>ts', function()
         neotest.run.stop(vim.fn.expand("%"))
     end)
-    
+
     vim.keymap.set('n', '<Leader>tt', function()
         neotest.summary.toggle()
     end)

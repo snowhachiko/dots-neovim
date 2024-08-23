@@ -44,6 +44,8 @@ neotest = "5.3.3"
 "onedarkpro.nvim" = "0.8.0"
 nvim-cmp= "scm"
 "oil.nvim" = "2.10.0"
+"conform.nvim" = "7.1.0"
+nvim-notify = "3.13.5"
 
 [plugins."indent-blankline.nvim"]
 git = "lukas-reineke/indent-blankline.nvim"
