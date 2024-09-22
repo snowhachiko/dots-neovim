@@ -86,6 +86,9 @@ git = "cpea2506/one_monokai.nvim"
 # rev = "v2.3.0"
 version = "v2.3.0"
 
+[plugins."transparent.nvim"]
+git = "xiyaowong/transparent.nvim"
+
 [bundles.lsp]
 items = [
     "nvim-lspconfig",
