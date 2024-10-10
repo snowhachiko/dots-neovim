@@ -1,3 +1,6 @@
+# config requires `rocks-git.nvim` and `rocks-config.nvim`
+# to execute :Rocks sync
+
 # This is your rocks.nvim plugins declaration file.
 # Here is a small yet pretty detailed example on how to use it:
 #
@@ -11,9 +14,9 @@
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks.nvim" = "2.32.0"
+"rocks.nvim" = "2.40.2"
 "mason.nvim" = "1.10.0"
-"rocks-config.nvim" = "2.1.1"
+"rocks-config.nvim" = "3.0.0"
 "lualine.nvim" = "scm"
 "telescope.nvim" = "scm"
 vim-moonfly-colors = "scm"
@@ -22,72 +25,61 @@ vim-moonfly-colors = "scm"
 "lspkind.nvim" = "scm"
 "nvim-autopairs" = "scm"
 luasnip = "2.3.0"
-"rocks-git.nvim" = "2.0.1"
-nvim-lspconfig = "0.1.8"
-"mason-lspconfig.nvim" = "1.29.0"
+"rocks-git.nvim" = "2.3.1"
+nvim-lspconfig = "1.0.0"
+"mason-lspconfig.nvim" = "1.31.0"
 nvim-dap = "0.8.0"
 nvim-dap-ui = "4.0.0"
-"mason-nvim-dap.nvim" = "2.3.0"
-rustaceanvim = "4.25.1"
+"mason-nvim-dap.nvim" = "2.4.0"
+rustaceanvim = "5.11.0"
 cmp_luasnip = "scm"
 cmp-buffer = "scm"
 cmp-nvim-lsp = "scm"
 cmp-path = "scm"
-"dressing.nvim" = "2.2.2"
+"dressing.nvim" = "3.0.0"
 alpha-nvim = "scm"
-"todo-comments.nvim" = "1.2.0"
+"todo-comments.nvim" = "1.4.0"
 "comment.nvim" = "0.8.0"
 nvim-surround = "2.1.5"
-"trouble.nvim" = "3.4.3"
-neotest = "5.3.3"
+"trouble.nvim" = "3.6.0"
+neotest = "5.6.1"
 "telescope-file-browser.nvim" = "scm"
-"onedarkpro.nvim" = "0.8.0"
+"onedarkpro.nvim" = "1.0.0"
 nvim-cmp= "scm"
-"oil.nvim" = "2.10.0"
-"conform.nvim" = "7.1.0"
-nvim-notify = "3.13.5"
+"oil.nvim" = "2.12.2"
+"conform.nvim" = "8.1.0"
+nvim-notify = "3.14.0"
 nvim-lint = "scm"
+friendly-snippets= "scm"
+"harpoon"= "scm"
 
 [plugins."indent-blankline.nvim"]
 git = "lukas-reineke/indent-blankline.nvim"
-# rev = "v3.7.1"
-version = "v3.7.1"
+rev = "v3.8.2"
 
 [plugins.cmp-nvim-lsp-signature-help]
 git = "hrsh7th/cmp-nvim-lsp-signature-help"
-version = "scm"
+rev = "031e6ba70b0ad5eee49fd2120ff7a2e325b17fa7"
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"
-# rev = "v0.9.2^{}"
-version = "v0.9.2^{}"
-
-[plugins.friendly-snippets]
-git = "rafamadriz/friendly-snippets"
-version = "scm"
+rev = "v0.9.2^{}"
 
 [plugins.vim-fugitive]
 git = "tpope/vim-fugitive"
-# rev = "v3.7^{}"
-version = "v3.7^{}"
+rev = "v3.7^{}"
 
 [plugins."gitsigns.nvim"]
 git = "lewis6991/gitsigns.nvim"
-# rev = "v0.9.0"
-version = "v0.9.0"
-
-[plugins."harpoon"]
-git = "ThePrimeagen/harpoon"
-branch = "harpoon2"
-version = "scm"
+rev = "v0.9.0"
 
 [plugins."one_monokai.nvim"]
 git = "cpea2506/one_monokai.nvim"
-# rev = "v2.3.0"
-version = "v2.3.0"
+rev = "v2.3.0"
 
 [plugins."transparent.nvim"]
 git = "xiyaowong/transparent.nvim"
+rev = "8a2749a2fa74f97fe6557f61b89ac7fd873f3c21"
 
 [bundles.lsp]
 items = [
