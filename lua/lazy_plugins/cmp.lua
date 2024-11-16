@@ -1,8 +1,21 @@
 return {
 
-    "hrsh7th/nvim-cmp",
+    -- snippets
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        dependencies = {
+            { "rafamadriz/friendly-snippets" },
+            -- { "honza/vim-snippets" }
+        }
+    },
+    {
+        "hrsh7th/nvim-cmp",
+    },
 
     config = function()
+        require('nvim-autopairs').setup()
         local cmp = require('cmp')
         local cmp_autopairs = require('nvim-autopairs.completion.cmp')
         local luasnip = require("luasnip")
@@ -53,6 +66,7 @@ return {
             },
             {
                 { name = 'buffer' },
+                { name = 'nvim_lua' },
             },
             formatting = {
                 fields = { "abbr", "kind", "menu" },
@@ -70,12 +84,14 @@ return {
             },
             view = { docs = { auto_open = false } },
             window = {
-                completion = cmp.config.window.bordered({
-                    max_width = 30,
-                }),
-                documentation = cmp.config.window.bordered({
-                    -- max_width = 250
-                }),
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+                -- completion = cmp.config.window.bordered({
+                --     max_width = 30,
+                -- }),
+                -- documentation = cmp.config.window.bordered({
+                --     -- max_width = 250
+                -- }),
             },
             mapping = cmp.mapping({
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),

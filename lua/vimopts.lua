@@ -40,6 +40,11 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.fileformats = { "unix", "dos" }
 vim.opt.shell = "/bin/bash"
 
+vim.opt.complete = ""
+-- Disable <C-p> and <C-n> in insert mode without outputting ^P or ^N
+vim.api.nvim_set_keymap('i', '<C-p>', '<C-o>:<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-n>', '<C-o>:<CR>', { noremap = true, silent = true })
+
 vim.g.mapleader = " "
 
 vim.opt.updatetime = 150
@@ -51,7 +56,7 @@ vim.opt.cmdheight = 0 -- disable command line when not entering commands
 vim.cmd [[
     au BufNewFile,BufRead *.xaml setlocal filetype=xml
     au BufNewFile,BufRead *.axaml setlocal filetype=xml
-    autocmd User LspInfoOpen hi LspFloatWinBorder guifg=#00ff00 guibg=NONE gui=NONE cterm=NONE
+    "autocmd User LspInfoOpen hi LspFloatWinBorder guifg=#00ff00 guibg=NONE gui=NONE cterm=NONE
 ]]
 
 vim.opt.termguicolors = true

@@ -7,8 +7,8 @@ return {
         'mrcjkb/rustaceanvim',
         version = '^4', -- Recommended
         lazy = false,   -- This plugin is already lazy
-        config = function ()
-            
+        config = function()
+
         end
     },
 
@@ -31,7 +31,7 @@ return {
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "saadparwaiz1/cmp_luasnip",
 
-            -- pictograms for cmp 
+            -- pictograms for cmp
             "onsails/lspkind.nvim",
         },
 
@@ -70,6 +70,12 @@ return {
                         })
                     end,
 
+                    omnisharp = function()
+                        lspconfig.omnisharp.setup({
+                            capabilities = capabilities
+                        })
+                    end,
+
                     clangd = function()
                         lspconfig.clangd.setup({
                             cmd = {
@@ -82,7 +88,7 @@ return {
 
                     lua_ls = function()
                         lspconfig.lua_ls.setup {
-                            -- capabilities = capabilities,
+                            capabilities = capabilities,
                             settings = {
                                 Lua = {
                                     diagnostics = {
@@ -94,11 +100,6 @@ return {
                     end,
                 },
             })
-            -- allow using system wide installation
-            -- rustaceanvim may conflict
-            -- lspconfig.rust_analyzer.setup {
-            --     capabilities = capabilities
-            -- }
         end
     },
 

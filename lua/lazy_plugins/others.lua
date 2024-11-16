@@ -1,7 +1,25 @@
 return {
+
+    {
+        "williamboman/mason.nvim",
+    },
+
     -- Git integration
-    "lewis6991/gitsigns.nvim",
-    "tpope/vim-fugitive",
+    {
+        "lewis6991/gitsigns.nvim",
+        "tpope/vim-fugitive",
+    },
+
+    -- switching to tmux panes
+    {
+        "christoomey/vim-tmux-navigator",
+    },
+
+    -- TODO highlight and list
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
 
     -- comment
     { "numToStr/Comment.nvim" },
@@ -25,4 +43,20 @@ return {
             })
         end
     },
+
+    -- colorschemes
+    "rebelot/kanagawa.nvim",
+    { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+
+    -- improve default vim.ui interfaces
+    { "stevearc/dressing.nvim" },
+
+    -- transparent
+    { "xiyaowong/transparent.nvim" },
+
+    config = function()
+        require('todo-comments').setup()
+        require('gitsigns').setup()
+        -- require('transparent').setup()
+    end
 }
