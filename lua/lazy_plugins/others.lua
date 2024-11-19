@@ -33,9 +33,6 @@ return {
     { "rebelot/kanagawa.nvim" },
     { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
 
-    -- improve default vim.ui interfaces
-    { "stevearc/dressing.nvim" },
-
     -- transparent
     { "xiyaowong/transparent.nvim" },
 
