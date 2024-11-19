@@ -1,5 +1,4 @@
 vim.keymap.set("n", ",fe", vim.cmd.Ex)
--- vim.keymap.set("n", ",fe", ":Oil<CR>")
 
 -- Resizing Continously with ALT
 vim.keymap.set('n', '<A-h>', '<C-W>>', { noremap = true })
@@ -58,15 +57,9 @@ autocmd('LspAttach', {
     end
 })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
-    require('conform').format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 500
-    })
-end)
-
---========= DAP
+---------------------
+-------- LSP --------
+---------------------
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)

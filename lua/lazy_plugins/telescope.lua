@@ -6,8 +6,11 @@ local config = function()
             layout_strategy = "flex",
         }
     })
-    -- require('telescope').load_extension "file_browser"
 
+    local telescope = require('telescope');
+    telescope.load_extension "file_browser"
+
+    local file_browser = telescope.load_extension "file_browser"
     local builtin = require('telescope.builtin')
     local utils = require('telescope.utils')
     -- local actions = require('telescope.actions')
@@ -23,12 +26,14 @@ local config = function()
     vim.keymap.set('n', ',fr', builtin.lsp_references, {})
     vim.keymap.set('n', ',fc', builtin.git_commits, {})
     vim.keymap.set('n', ',ft', function() vim.api.nvim_command(":TodoTelescope") end, {})
+    vim.keymap.set('n', ',fp', ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
     -- vim.keymap.set('n', '<c-d>', actions.delete_buffer, {})
 end
 
 return {
     "nvim-telescope/telescope.nvim",
     tag = '0.1.8',
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
+    dependencies = {
+        "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
     config = config
 }

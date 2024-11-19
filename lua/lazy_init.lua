@@ -11,12 +11,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-    spec = "lazy_plugins",
-    change_detection = { notify = false }
-}, {
-    ui = {
-        backdrop = 50,
-        border = Border_style
+require("lazy").setup(
+    {
+        spec = { import = "lazy_plugins" },
+        change_detection = { notify = false },
+        checker = { enabled = true }
     },
-})
+    {
+        ui = {
+            backdrop = 50,
+            border = Border_style
+        },
+    })
