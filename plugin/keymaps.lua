@@ -58,7 +58,7 @@ autocmd('LspAttach', {
 })
 
 ---------------------
--------- LSP --------
+-------- DAP --------
 ---------------------
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
@@ -104,20 +104,3 @@ if has_neotest then
         neotest.summary.toggle()
     end)
 end
-
-----------------------
------- comments ------
-----------------------
-
--- :help comment.config.Mappings
-
--- Default comment.nvim mappings
-
--- gbc -- block comment normal mode
--- gb  -- block comment visual mode
-
--- Normal mode
--- `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
--- `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
--- `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
--- `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment

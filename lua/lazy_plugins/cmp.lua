@@ -68,7 +68,7 @@ local config = function()
             end,
         },
         view = {
-            docs = { auto_open = false },
+            docs = { auto_open = true },
             entries = {
                 -- name = "custom",
                 selection_order = "near_cursor",
