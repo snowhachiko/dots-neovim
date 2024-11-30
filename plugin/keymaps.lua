@@ -20,7 +20,8 @@ vim.keymap.set("n", "<leader>[", ":cprev<CR>", { desc = "Backward qfixlist" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist)
 
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -31,7 +32,7 @@ autocmd('LspAttach', {
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-        vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', { buffer = true })
+        -- vim.keymap.set('n', ',gr', '<cmd>Telescope lsp_references<cr>', { buffer = true })
 
         vim.keymap.set('n', '<leader>e', function()
             vim.diagnostic.open_float(0, { scope = "line" })

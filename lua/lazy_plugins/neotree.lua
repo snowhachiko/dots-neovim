@@ -1,6 +1,18 @@
 local config = function()
-    vim.keymap.set('n', '<C-b>', '<Cmd>Neotree toggle<CR>')
-    vim.keymap.set('n', '<leader>tb', '<Cmd>Neotree toggle source=buffers<CR>')
+    vim.keymap.set('n', '<leader>te', '<Cmd>Neotree toggle left<CR>')
+    vim.keymap.set('n', '<leader>tb', '<Cmd>Neotree toggle left source=buffers<CR>')
+    vim.keymap.set('n', '<leader>tf', '<Cmd>Neotree toggle float<CR>')
+
+    require("neo-tree").setup({
+        default_component_configs = {
+            git_status = {
+                symbols = {
+                    modified = "",
+                    added = ""
+                }
+            }
+        }
+    })
 end
 
 return {

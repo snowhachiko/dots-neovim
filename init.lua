@@ -51,6 +51,10 @@ vim.opt.updatetime = 150
 
 vim.opt.cmdheight = 0 -- disable command line when not entering commands
 
+-- show cmd when recording macro
+vim.cmd [[ autocmd RecordingEnter * set cmdheight=1 ]]
+vim.cmd [[ autocmd RecordingLeave * set cmdheight=0 ]]
+
 -- Detects XAML files as XML
 vim.cmd [[
     au BufNewFile,BufRead *.xaml setlocal filetype=xml
