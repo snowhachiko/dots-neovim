@@ -33,7 +33,7 @@ vim.opt.showtabline = 1 -- 0 - never, 1 - when more than one, 2 - always
 vim.opt.list = true
 vim.opt.listchars = { tab = "| " }
 
-vim.opt.visualbell = true -- no beeping
+vim.opt.visualbell = true -- no beeping - set visual bell instead of beeping
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.clipboard = "unnamedplus"
